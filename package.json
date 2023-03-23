@@ -1,0 +1,19 @@
+{
+  "name": "connect-four",
+  "version": "1.0.0",
+  "description": "This CLI application runs a two-player connect four game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TOVTC/connect-four.git"
+  },
+  "author": "TOVTC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TOVTC/connect-four/issues"
+  },
+  "homepage": "https://github.com/TOVTC/connect-four#readme"
+}
