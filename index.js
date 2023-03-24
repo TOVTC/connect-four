@@ -1,3 +1,5 @@
+const inquirer = require('inquirer');
+
 class Connect4 {
 
   constructor() {
@@ -5,6 +7,8 @@ class Connect4 {
     this.player = 1;
     // total turns taken in game
     this.totalTurns = 0;
+    // track print board message
+    this.message = `Player ${this.player}'s turn!`;
 
     // track state of board
     this.board = {
@@ -30,9 +34,23 @@ class Connect4 {
       | ${(this.board[0][1]) ? this.board[0][1] : " "} | ${(this.board[1][1]) ? this.board[1][1] : " "} | ${(this.board[2][1]) ? this.board[2][1] : " "} | ${(this.board[3][1]) ? this.board[3][1] : " "} | ${(this.board[4][1]) ? this.board[4][1] : " "} | ${(this.board[5][1]) ? this.board[5][1] : " "} | ${(this.board[6][1]) ? this.board[6][1] : " "} |
       | ${(this.board[0][0]) ? this.board[0][0] : " "} | ${(this.board[1][0]) ? this.board[1][0] : " "} | ${(this.board[2][0]) ? this.board[2][0] : " "} | ${(this.board[3][0]) ? this.board[3][0] : " "} | ${(this.board[4][0]) ? this.board[4][0] : " "} | ${(this.board[5][0]) ? this.board[5][0] : " "} | ${(this.board[6][0]) ? this.board[6][0] : " "} |
       -----------------------------
-      Player ${this.player}'s turn!
+      ${this.message}
       `
     );
+  }
+
+  // accept user input
+  async makeMove() {
+    let response = await inquirer.prompt([
+      {
+        type: "list",
+        name: "column",
+        message: "Add your piece to which column?",
+        choices: [0, 1, 2, 3, 4, 5, 6]
+      }
+    ])
+    this.play(response.column);
+    return;
   }
 
   // check if vertical four-in-a-row
@@ -109,20 +127,12 @@ class Connect4 {
 
   // take a turn
   play(col) {
-    // for return statement
-    let lastPlayer = this.player;
-
-    // check if game is over
-    if (this.gameOver) {
-      return "Game has finished!";
-    }
     // check if column full
     if (this.board[col].length === 6) {
-      return "Column full!";
-    }
-    // check if board full
-    if (this.totalTurns === 42) {
-      return "Game ended in a tie!";
+      this.message = `Column is full! Player ${this.player}, please pick a different column.`;
+      this.printBoard();
+      this.makeMove();
+      return;
     }
 
     // add piece to column
@@ -139,24 +149,34 @@ class Connect4 {
     let diagonal = this.validateDiagonal(col, n);
 
     if (vertical || horizontal || diagonal) {
-      return `Player ${this.player} wins!`;
+      this.message = `Player ${this.player} wins!`;
+      this.printBoard();
+      return;
     }
 
-    // change player
-    (this.player === 1) ? this.player = 2 : this.player = 1;
+    // check if board full
+    if (this.totalTurns === 42) {
+      this.message = `Game ended in a tie!`;
+      this.printBoard();
+      return;
+    }
 
-    // end turn
-    return `Player ${lastPlayer} has a turn`;
+    // change player, update message
+    (this.player === 1) ? this.player = 2 : this.player = 1;
+    this.message = `Player ${this.player}'s turn!`
+    this.printBoard();
+    this.makeMove();
   }
 
   // start game
   newGame() {
-    console.log("Welcome to Connect Four!");
+    console.log("Welcome to two-player Connect Four!");
     console.log("\nEach player will take turns adding a game piece to one of seven columns.");
-    console.log("The pieces enter from the top and land at the very bottom or stack on top of existing pieces.");
+    console.log("The pieces enter from the top of the column and drop to very bottom, stacking on top of existing pieces.");
     console.log("The objective is to be the first player to align four of the player's own pieces in a column, row, or diagonal.");
-    console.log("This is the board. Player one takes the first move. Good luck!")
+    console.log("This is the board. Player one takes the first move. Good luck!");
     this.printBoard();
+    this.makeMove();
   }
 }
 
