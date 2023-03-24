@@ -1,0 +1,140 @@
+class Connect4 {
+
+  constructor() {
+    // track current player's turn
+    this.player = 1;
+    // total turns taken in game
+    this.totalTurns = 0;
+    // track if game over
+    this.gameOver = false;
+
+    // track state of board
+    this.board = {
+      0: [],
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+    }
+  }
+
+  // check if vertical four-in-a-row
+  validateVertical(col, n) {
+    // if column array length < 4 no need to validate
+    if (this.board[col].length < 4) {
+      return false;
+    }
+
+    // retrieve position of pieces three spaces below current piece
+    let string = `${this.board[col][n-3]}${this.board[col][n-2]}${this.board[col][n-1]}${this.board[col][n]}`;
+    
+    // check if string includes 4 in a row
+    return string.includes(`${this.player}${this.player}${this.player}${this.player}`);
+  }
+
+  // check if horizontal four-in-a-row
+  validateHorizontal(col, n) {
+    // intialize empty string to hold pieces in a row
+    let string = "";
+    
+    // retrieve position of pieces three spaces left and right of current piece
+    const horAdjust = [col-3, col-2, col-1, col, col+1, col+2, col+3];
+    // remove column positions that do not exist on the board
+    const horizontal = horAdjust.filter(pos => pos >= 0 && pos < 7);
+
+    // retrieve value of piece in specified positions
+    horizontal.forEach(pos => {
+      let piece = this.board[pos][n];
+      // if the space is empty add a zero
+      (!piece) ? string += 0 : string += piece;
+    });
+
+    // check if string includes 4 in a row
+    return string.includes(`${this.player}${this.player}${this.player}${this.player}`);
+  }
+
+  // check if diagonal four-in-a-row
+  validateDiagonal(col, n) {
+    // intialize empty strings to hold pieces in a diagonal
+    let str1 = "";
+    let str2 = "";
+
+    // retrieve position of pieces three spaces down/left and up/right
+    const sameAdj = [[col-3, n-3], [col-2, n-2], [col-1, n-1], [col, n], [col+1, n+1], [col+2, n+2], [col+3, n+3]];
+    // remove column positions that do not exist on the board
+    const diag1 = sameAdj.filter(pos => pos[0] >= 0 && pos[0] < 7);
+    
+    // retrieve value of piece in specified positions
+    diag1.forEach(pos => {
+      let piece = this.board[pos[0]][pos[1]];
+      // if the space is empty add a zero
+      (!piece) ? str1 += 0 : str1 += piece;
+    });
+
+    // retrieve position of pieces three spaces up/left and down/right
+    const oppositeAdj = [[col-3, n+3], [col-2, n+2], [col-1, n+1], [col, n], [col+1, n-1], [col+2, n-2], [col+3, n-3]];
+    // remove column positions that do not exist on the the board
+    const diag2 = oppositeAdj.filter(pos => pos[0] >= 0 && pos[0] < 7);
+    
+    // retrieve value of piece in specified positions
+    diag2.forEach(pos => {
+      let piece = this.board[pos[0]][pos[1]];
+      // if the space is empty add a zero
+      (!piece) ? str2 += 0 : str2 += piece;
+    });
+
+    // if either diagonal contains four-in-a-row return true
+    if (str1.includes(`${this.player}${this.player}${this.player}${this.player}`) || str2.includes(`${this.player}${this.player}${this.player}${this.player}`)) {
+      return true;
+    }
+    return false;
+  }
+
+  // take a turn
+  play(col) {
+    // for return statement
+    let lastPlayer = this.player;
+
+    // check if game is over
+    if (this.gameOver) {
+      return "Game has finished!";
+    }
+    // check if column full
+    if (this.board[col].length === 6) {
+      return "Column full!";
+    }
+    // check if board full
+    if (this.totalTurns === 42) {
+      this.gameOver = true;
+      return "Game ended in a tie!";
+    }
+
+    // add piece to column
+    this.board[col].push(this.player);
+    // increase total turns
+    this.totalTurns += 1;
+
+    // retrieve current piece's position in column
+    let n = this.board[col].length-1;
+
+    // check if piece made a winning move
+    let vertical = this.validateVertical(col, n);
+    let horizontal = this.validateHorizontal(col, n);
+    let diagonal = this.validateDiagonal(col, n);
+
+    if (vertical || horizontal || diagonal) {
+      this.gameOver = true;
+      return `Player ${this.player} wins!`;
+    }
+
+    // change player
+    (this.player === 1) ? this.player = 2 : this.player = 1;
+
+    // end turn
+    return `Player ${lastPlayer} has a turn`;
+  }
+}
+
+new Connect4();
