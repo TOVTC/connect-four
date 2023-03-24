@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/TOVTC/connect-four/issues"
   },
-  "homepage": "https://github.com/TOVTC/connect-four#readme"
+  "homepage": "https://github.com/TOVTC/connect-four#readme",
+  "dependencies": {
+    "inquirer": "^9.1.5"
+  }
 }

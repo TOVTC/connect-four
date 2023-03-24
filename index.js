@@ -5,8 +5,6 @@ class Connect4 {
     this.player = 1;
     // total turns taken in game
     this.totalTurns = 0;
-    // track if game over
-    this.gameOver = false;
 
     // track state of board
     this.board = {
@@ -18,6 +16,23 @@ class Connect4 {
       5: [],
       6: [],
     }
+  }
+
+  // print current state of board
+  printBoard() {
+    console.log(
+      `
+        0   1   2   3   4   5   6
+      | ${(this.board[0][5]) ? this.board[0][5] : " "} | ${(this.board[1][5]) ? this.board[1][5] : " "} | ${(this.board[2][5]) ? this.board[2][5] : " "} | ${(this.board[3][5]) ? this.board[3][5] : " "} | ${(this.board[4][5]) ? this.board[4][5] : " "} | ${(this.board[5][5]) ? this.board[5][5] : " "} | ${(this.board[6][5]) ? this.board[6][5] : " "} |
+      | ${(this.board[0][4]) ? this.board[0][4] : " "} | ${(this.board[1][4]) ? this.board[1][4] : " "} | ${(this.board[2][4]) ? this.board[2][4] : " "} | ${(this.board[3][4]) ? this.board[3][4] : " "} | ${(this.board[4][4]) ? this.board[4][4] : " "} | ${(this.board[5][4]) ? this.board[5][4] : " "} | ${(this.board[6][4]) ? this.board[6][4] : " "} |
+      | ${(this.board[0][3]) ? this.board[0][3] : " "} | ${(this.board[1][3]) ? this.board[1][3] : " "} | ${(this.board[2][3]) ? this.board[2][3] : " "} | ${(this.board[3][3]) ? this.board[3][3] : " "} | ${(this.board[4][3]) ? this.board[4][3] : " "} | ${(this.board[5][3]) ? this.board[5][3] : " "} | ${(this.board[6][3]) ? this.board[6][3] : " "} |
+      | ${(this.board[0][2]) ? this.board[0][2] : " "} | ${(this.board[1][2]) ? this.board[1][2] : " "} | ${(this.board[2][2]) ? this.board[2][2] : " "} | ${(this.board[3][2]) ? this.board[3][2] : " "} | ${(this.board[4][2]) ? this.board[4][2] : " "} | ${(this.board[5][2]) ? this.board[5][2] : " "} | ${(this.board[6][2]) ? this.board[6][2] : " "} |
+      | ${(this.board[0][1]) ? this.board[0][1] : " "} | ${(this.board[1][1]) ? this.board[1][1] : " "} | ${(this.board[2][1]) ? this.board[2][1] : " "} | ${(this.board[3][1]) ? this.board[3][1] : " "} | ${(this.board[4][1]) ? this.board[4][1] : " "} | ${(this.board[5][1]) ? this.board[5][1] : " "} | ${(this.board[6][1]) ? this.board[6][1] : " "} |
+      | ${(this.board[0][0]) ? this.board[0][0] : " "} | ${(this.board[1][0]) ? this.board[1][0] : " "} | ${(this.board[2][0]) ? this.board[2][0] : " "} | ${(this.board[3][0]) ? this.board[3][0] : " "} | ${(this.board[4][0]) ? this.board[4][0] : " "} | ${(this.board[5][0]) ? this.board[5][0] : " "} | ${(this.board[6][0]) ? this.board[6][0] : " "} |
+      -----------------------------
+      Player ${this.player}'s turn!
+      `
+    );
   }
 
   // check if vertical four-in-a-row
@@ -107,7 +122,6 @@ class Connect4 {
     }
     // check if board full
     if (this.totalTurns === 42) {
-      this.gameOver = true;
       return "Game ended in a tie!";
     }
 
@@ -125,7 +139,6 @@ class Connect4 {
     let diagonal = this.validateDiagonal(col, n);
 
     if (vertical || horizontal || diagonal) {
-      this.gameOver = true;
       return `Player ${this.player} wins!`;
     }
 
@@ -135,6 +148,16 @@ class Connect4 {
     // end turn
     return `Player ${lastPlayer} has a turn`;
   }
+
+  // start game
+  newGame() {
+    console.log("Welcome to Connect Four!");
+    console.log("\nEach player will take turns adding a game piece to one of seven columns.");
+    console.log("The pieces enter from the top and land at the very bottom or stack on top of existing pieces.");
+    console.log("The objective is to be the first player to align four of the player's own pieces in a column, row, or diagonal.");
+    console.log("This is the board. Player one takes the first move. Good luck!")
+    this.printBoard();
+  }
 }
 
-new Connect4();
+new Connect4().newGame();
