@@ -8,7 +8,7 @@ class Connect4 {
     // total turns taken in game
     this.totalTurns = 0;
     // track print board message
-    this.message = `Player ${this.player}'s turn!`;
+    this.message = `Player ${this.player}'s (${this.player === 1 ? 'X' : 'O'}) turn!`;
 
     // track state of board
     this.board = {
@@ -27,12 +27,12 @@ class Connect4 {
     console.log(
       `
         0   1   2   3   4   5   6
-      | ${(this.board[0][5]) ? this.board[0][5] : " "} | ${(this.board[1][5]) ? this.board[1][5] : " "} | ${(this.board[2][5]) ? this.board[2][5] : " "} | ${(this.board[3][5]) ? this.board[3][5] : " "} | ${(this.board[4][5]) ? this.board[4][5] : " "} | ${(this.board[5][5]) ? this.board[5][5] : " "} | ${(this.board[6][5]) ? this.board[6][5] : " "} |
-      | ${(this.board[0][4]) ? this.board[0][4] : " "} | ${(this.board[1][4]) ? this.board[1][4] : " "} | ${(this.board[2][4]) ? this.board[2][4] : " "} | ${(this.board[3][4]) ? this.board[3][4] : " "} | ${(this.board[4][4]) ? this.board[4][4] : " "} | ${(this.board[5][4]) ? this.board[5][4] : " "} | ${(this.board[6][4]) ? this.board[6][4] : " "} |
-      | ${(this.board[0][3]) ? this.board[0][3] : " "} | ${(this.board[1][3]) ? this.board[1][3] : " "} | ${(this.board[2][3]) ? this.board[2][3] : " "} | ${(this.board[3][3]) ? this.board[3][3] : " "} | ${(this.board[4][3]) ? this.board[4][3] : " "} | ${(this.board[5][3]) ? this.board[5][3] : " "} | ${(this.board[6][3]) ? this.board[6][3] : " "} |
-      | ${(this.board[0][2]) ? this.board[0][2] : " "} | ${(this.board[1][2]) ? this.board[1][2] : " "} | ${(this.board[2][2]) ? this.board[2][2] : " "} | ${(this.board[3][2]) ? this.board[3][2] : " "} | ${(this.board[4][2]) ? this.board[4][2] : " "} | ${(this.board[5][2]) ? this.board[5][2] : " "} | ${(this.board[6][2]) ? this.board[6][2] : " "} |
-      | ${(this.board[0][1]) ? this.board[0][1] : " "} | ${(this.board[1][1]) ? this.board[1][1] : " "} | ${(this.board[2][1]) ? this.board[2][1] : " "} | ${(this.board[3][1]) ? this.board[3][1] : " "} | ${(this.board[4][1]) ? this.board[4][1] : " "} | ${(this.board[5][1]) ? this.board[5][1] : " "} | ${(this.board[6][1]) ? this.board[6][1] : " "} |
-      | ${(this.board[0][0]) ? this.board[0][0] : " "} | ${(this.board[1][0]) ? this.board[1][0] : " "} | ${(this.board[2][0]) ? this.board[2][0] : " "} | ${(this.board[3][0]) ? this.board[3][0] : " "} | ${(this.board[4][0]) ? this.board[4][0] : " "} | ${(this.board[5][0]) ? this.board[5][0] : " "} | ${(this.board[6][0]) ? this.board[6][0] : " "} |
+      | ${this.board[0][5] ? (this.board[0][5] == 1 ? 'X' : 'O') : " "} | ${this.board[1][5] ? (this.board[1][5] == 1 ? 'X' : 'O') : " "} | ${this.board[2][5] ? (this.board[2][5] == 1 ? 'X' : 'O') : " "} | ${this.board[3][5] ? (this.board[3][5] == 1 ? 'X' : 'O') : " "} | ${this.board[4][5] ? (this.board[4][5] == 1 ? 'X' : 'O') : " "} | ${this.board[5][5] ? (this.board[5][5] == 1 ? 'X' : 'O') : " "} | ${this.board[6][5] ? (this.board[6][5] == 1 ? 'X' : 'O') : " "} |
+      | ${this.board[0][4] ? (this.board[0][4] == 1 ? 'X' : 'O') : " "} | ${this.board[1][4] ? (this.board[1][4] == 1 ? 'X' : 'O') : " "} | ${this.board[2][4] ? (this.board[2][4] == 1 ? 'X' : 'O') : " "} | ${this.board[3][4] ? (this.board[3][4] == 1 ? 'X' : 'O') : " "} | ${this.board[4][4] ? (this.board[4][4] == 1 ? 'X' : 'O') : " "} | ${this.board[5][4] ? (this.board[5][4] == 1 ? 'X' : 'O') : " "} | ${this.board[6][4] ? (this.board[6][4] == 1 ? 'X' : 'O') : " "} |
+      | ${this.board[0][3] ? (this.board[0][3] == 1 ? 'X' : 'O') : " "} | ${this.board[1][3] ? (this.board[1][3] == 1 ? 'X' : 'O') : " "} | ${this.board[2][3] ? (this.board[2][3] == 1 ? 'X' : 'O') : " "} | ${this.board[3][3] ? (this.board[3][3] == 1 ? 'X' : 'O') : " "} | ${this.board[4][3] ? (this.board[4][3] == 1 ? 'X' : 'O') : " "} | ${this.board[5][3] ? (this.board[5][3] == 1 ? 'X' : 'O') : " "} | ${this.board[6][3] ? (this.board[6][3] == 1 ? 'X' : 'O') : " "} |
+      | ${this.board[0][2] ? (this.board[0][2] == 1 ? 'X' : 'O') : " "} | ${this.board[1][2] ? (this.board[1][2] == 1 ? 'X' : 'O') : " "} | ${this.board[2][2] ? (this.board[2][2] == 1 ? 'X' : 'O') : " "} | ${this.board[3][2] ? (this.board[3][2] == 1 ? 'X' : 'O') : " "} | ${this.board[4][2] ? (this.board[4][2] == 1 ? 'X' : 'O') : " "} | ${this.board[5][2] ? (this.board[5][2] == 1 ? 'X' : 'O') : " "} | ${this.board[6][2] ? (this.board[6][2] == 1 ? 'X' : 'O') : " "} |
+      | ${this.board[0][1] ? (this.board[0][1] == 1 ? 'X' : 'O') : " "} | ${this.board[1][1] ? (this.board[1][1] == 1 ? 'X' : 'O') : " "} | ${this.board[2][1] ? (this.board[2][1] == 1 ? 'X' : 'O') : " "} | ${this.board[3][1] ? (this.board[3][1] == 1 ? 'X' : 'O') : " "} | ${this.board[4][1] ? (this.board[4][1] == 1 ? 'X' : 'O') : " "} | ${this.board[5][1] ? (this.board[5][1] == 1 ? 'X' : 'O') : " "} | ${this.board[6][1] ? (this.board[6][1] == 1 ? 'X' : 'O') : " "} |
+      | ${this.board[0][0] ? (this.board[0][0] == 1 ? 'X' : 'O') : " "} | ${this.board[1][0] ? (this.board[1][0] == 1 ? 'X' : 'O') : " "} | ${this.board[2][0] ? (this.board[2][0] == 1 ? 'X' : 'O') : " "} | ${this.board[3][0] ? (this.board[3][0] == 1 ? 'X' : 'O') : " "} | ${this.board[4][0] ? (this.board[4][0] == 1 ? 'X' : 'O') : " "} | ${this.board[5][0] ? (this.board[5][0] == 1 ? 'X' : 'O') : " "} | ${this.board[6][0] ? (this.board[6][0] == 1 ? 'X' : 'O') : " "} |
       -----------------------------
       ${this.message}
       `
@@ -50,7 +50,6 @@ class Connect4 {
       }
     ])
     this.play(response.column);
-    return;
   }
 
   // check if vertical four-in-a-row
@@ -81,7 +80,7 @@ class Connect4 {
     horizontal.forEach(pos => {
       let piece = this.board[pos][n];
       // if the space is empty add a zero
-      (!piece) ? string += 0 : string += piece;
+      !piece ? string += 0 : string += piece;
     });
 
     // check if string includes 4 in a row
@@ -103,7 +102,7 @@ class Connect4 {
     diag1.forEach(pos => {
       let piece = this.board[pos[0]][pos[1]];
       // if the space is empty add a zero
-      (!piece) ? str1 += 0 : str1 += piece;
+      !piece ? str1 += 0 : str1 += piece;
     });
 
     // retrieve position of pieces three spaces up/left and down/right
@@ -115,21 +114,18 @@ class Connect4 {
     diag2.forEach(pos => {
       let piece = this.board[pos[0]][pos[1]];
       // if the space is empty add a zero
-      (!piece) ? str2 += 0 : str2 += piece;
+      !piece ? str2 += 0 : str2 += piece;
     });
 
     // if either diagonal contains four-in-a-row return true
-    if (str1.includes(`${this.player}${this.player}${this.player}${this.player}`) || str2.includes(`${this.player}${this.player}${this.player}${this.player}`)) {
-      return true;
-    }
-    return false;
+    return str1.includes(`${this.player}${this.player}${this.player}${this.player}`) || str2.includes(`${this.player}${this.player}${this.player}${this.player}`);
   }
 
   // take a turn
   play(col) {
     // check if column full
     if (this.board[col].length === 6) {
-      this.message = `Column is full! Player ${this.player}, please pick a different column.`;
+      this.message = `Column is full! Player ${this.player} (${this.player === 1 ? 'X' : 'O'}), please pick a different column.`;
       this.printBoard();
       this.makeMove();
       return;
@@ -149,7 +145,7 @@ class Connect4 {
     let diagonal = this.validateDiagonal(col, n);
 
     if (vertical || horizontal || diagonal) {
-      this.message = `Player ${this.player} wins!`;
+      this.message = `Player ${this.player} (${this.player === 1 ? 'X' : 'O'}) wins!`;
       this.printBoard();
       return;
     }
@@ -162,8 +158,8 @@ class Connect4 {
     }
 
     // change player, update message
-    (this.player === 1) ? this.player = 2 : this.player = 1;
-    this.message = `Player ${this.player}'s turn!`
+    this.player === 1 ? this.player = 2 : this.player = 1;
+    this.message = `Player ${this.player}'s (${this.player === 1 ? 'X' : 'O'}) turn!`
     this.printBoard();
     this.makeMove();
   }
@@ -174,7 +170,7 @@ class Connect4 {
     console.log("\nEach player will take turns adding a game piece to one of seven columns.");
     console.log("The pieces enter from the top of the column and drop to very bottom, stacking on top of existing pieces.");
     console.log("The objective is to be the first player to align four of the player's own pieces in a column, row, or diagonal.");
-    console.log("This is the board. Player one takes the first move. Good luck!");
+    console.log("This is the board. Player 1 (X) takes the first move. Good luck!");
     this.printBoard();
     this.makeMove();
   }

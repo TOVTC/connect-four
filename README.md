@@ -24,12 +24,14 @@
   ## Usage Information<a name="usage"></a>
   
   This application is a digital, CLI version of a classic two-player board game.</br>
+  *Now updated to use X's and O's to represent players 1 and 2 on the game board for better visual clarity.</br>
+  </br>![Connect Four](./x-o.png "Connect Four")</br>
   </br>![Connect Four](./connect-four-1.png "Connect Four")</br>
   </br>![Connect Four](./connect-four-2.png "Connect Four")</br>
     
   ## Authors & Acknowledgements<a name="credits"></a>
   
-  The base code for this application was originally written by TOVTC as part of a solution for the [dev test](https://github.com/CristobalSalazar/DevTest) from Cristobal Salazar. This repostiory hosts an extended version of this code to enable interactive gameplay.
+  The base code for this application was originally written by TOVTC as part of a solution for the [dev test](https://github.com/CristobalSalazar/DevTest) from Cristobal Salazar. This repository hosts an extended version of this code to enable interactive gameplay.
   
   Made by [TOVTC](https://github.com/TOVTC).
   
