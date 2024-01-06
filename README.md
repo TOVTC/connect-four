@@ -31,7 +31,7 @@
     
   ## Authors & Acknowledgements<a name="credits"></a>
   
-  The base code for this application was originally written by TOVTC as part of a solution for the [dev test](https://github.com/CristobalSalazar/DevTest) from Cristobal Salazar. This repository hosts an extended version of this code to enable interactive gameplay.
+  The base code for this application was originally written by TOVTC as part of a solution for a dev test. This repository hosts an extended version of this code to enable interactive gameplay.
   
   Made by [TOVTC](https://github.com/TOVTC).
   
